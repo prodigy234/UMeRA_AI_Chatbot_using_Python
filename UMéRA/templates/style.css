@@ -1,0 +1,156 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+body {
+    background-color: #1b0101;
+}
+
+#main {
+    display: flex;
+    /* flex-direction: row; */
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+}
+
+#sidebar {
+    display: flex;
+    flex-direction: column;
+    background-color: #f9f9f9;
+    flex:0.2 1 auto;
+    gap: 25px;
+    padding: 25px;
+    /* max-width: 300px; */
+}
+
+#dashboard {
+    /* background-color: purple; */
+    display: flex;
+    flex-direction: column;
+   align-items: center;
+    flex-shrink: 0;
+    flex-grow: 1;
+    padding: 25px;
+    max-width: 100%;
+}
+
+#dashboard > h1 {
+    font-weight: 800;
+    color: white;
+}
+
+#avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: #890709;
+}
+
+#avatar > h1 {
+    color: white;
+}
+
+#nav > ul {
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+}
+#nav .nav-items {
+    color: rgb(93,93,93, 0.8);
+    font-size: 20px;
+}
+
+#sidebar div:nth-child(2) {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    gap: 15px;
+    border: 2px solid #890709;
+    border-radius: 50px;
+}
+
+
+.fa-paper-plane {
+    font-size: 30px;
+}
+
+#chatbox {
+    margin: 50px auto;
+    width: 40%;
+}
+.botText, .userText {
+    font-family: monospace;
+    font-size: 16px;
+    line-height: 25px;
+}
+.botText span {
+    color: blue;
+    display: block;
+    text-align: left;
+}
+.userText span {
+    color: green;
+    display: block;
+    text-align: right;
+}
+
+.inputContainer {
+    position: fixed;
+    width: 70%;
+    bottom: 80px;
+}
+
+.inputContainer  .fa-paper-plane {
+    color : #890709;
+}
+
+#userInput {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0  20px 0 0;
+    /* margin: 50px auto; */
+    width: 100%;
+    border-radius: 50px;
+    background-color: #f9f9f9;
+}
+#textInput {
+    border-bottom: 3px solid green;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    font-size: 16px;
+    padding: 20px;
+    /* padding: 10px 10px 50px; */
+    /* height: 80px; */
+    /* width: 80%; */
+}
+#buttonInput {
+    padding: 5px 10px;
+    font-size: 16px;
+}
+h1 {
+    text-align: center;
+}
+
+@media (max-width: 768px) { 
+    /* Styles for tablets and smaller devices */ 
+  }
+  
+  @media (min-width: 769px) and (max-width: 1024px) { 
+    /* Styles for tablets only */ 
+  }
+  
+  @media (min-width: 1025px) { 
+    /* Styles for desktops only */ 
+  }
