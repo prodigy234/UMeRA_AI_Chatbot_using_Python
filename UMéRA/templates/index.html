@@ -8,110 +8,292 @@
     <script src="https://code.jquery.com/jquery-3.7.1.js" 
             integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" 
             crossorigin="anonymous"></script>
-
     <style>
-        body {
-            font-family: sans-serif;
-        }
-        #chatbox {
-            margin: 50px auto;
-            width: 40%;
-        }
-        .botText, .userText {
-            font-family: monospace;
-            font-size: 16px;
-            line-height: 25px;
-        }
-        .botText span {
-            color: blue;
-            display: block;
-            text-align: left;
-        }
-        .userText span {
-            color: green;
-            display: block;
-            text-align: right;
-        }
-        #userInput {
-            margin: 50px auto;
-            width: 80%;
-            text-align: center;
-        }
-        #textInput {
-            border-bottom: 3px solid green;
-            font-size: 16px;
-            width: 80%;
-        }
-        #buttonInput {
-            padding: 5px 10px;
-            font-size: 16px;
-        }
-        h1 {
-            text-align: center;
-        }
+        * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+body {
+    background-color: #1b0101;
+}
+
+#main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+}
+
+#sidebar {
+    display: flex;
+    flex-direction: column;
+    background-color: #f9f9f9;
+    flex: 0.2 1 auto;
+    gap: 25px;
+    padding: 25px;
+}
+
+#dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    flex-grow: 1;
+    padding: 25px;
+    max-width: 100%;
+}
+
+#dashboard > h1 {
+    /* position: fixed; */
+    font-weight: 800;
+    color: white;
+}
+
+#avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: #890709;
+}
+
+#avatar > h1 {
+    color: white;
+}
+
+#nav > ul {
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+}
+
+#nav .nav-items {
+    color: rgb(93, 93, 93, 0.8);
+    font-size: 20px;
+}
+
+#sidebar div:nth-child(2) {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    gap: 15px;
+    border: 2px solid #890709;
+    border-radius: 50px;
+}
+
+.fa-paper-plane {
+    font-size: 30px;
+}
+
+#chatbox {
+    margin: 50px auto;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between messages */
+}
+.removeBotText {
+    display : none;
+}
+
+.botText, .userText {
+    font-family: monospace;
+    font-size: 16px;
+    line-height: 25px;
+    padding: 10px; /* Padding around the text */
+    border-radius: 10px; /* Rounded corners */
+    margin-bottom: 10px; /* Space below each message */
+    max-width: 80%; /* Limit message width */
+}
+
+.botText {
+    background-color: rgba(255,255,255, 0.1); /* Light gray background for bot */
+    border: 1px solid #333 ;
+    text-align: left; /* Align text to the left */
+}
+
+.botText span {
+    color: #ffffff; /* Black text for bot */
+}
+
+.userText {
+    text-align: right; /* Align text to the right */
+    align-self: flex-end; /* Align user messages to the right */
+}
+
+.userText span {
+    color: #ffffff; /* Black text for user */
+}
+
+.inputContainer {
+    position: fixed;
+    width: 50%;
+    bottom: 80px;
+}
+
+.inputContainer .fa-paper-plane {
+    color: #890709;
+}
+
+#userInput {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px 0 0;
+    width: 100%;
+    border-radius: 50px;
+    background-color: #f9f9f9;
+}
+
+#textInput {
+    border-bottom: 3px solid green;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    width: 100%;
+    font-size: 16px;
+    padding: 20px;
+}
+
+#buttonInput {
+    padding: 5px 10px;
+    font-size: 16px;
+}
+
+#promptContainer {
+    display: static;
+    height: 70vh;
+    width: 70vw;
+    /* background-color: aqua; */
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+#promptContainer::-webkit-scrollbar{
+    height: 60px;
+    width: 10px;
+}
+
+#promptContainer::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#promptContainer::-webkit-scrollbar-thumb {
+    background: white;
+    border-radius: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    /* Styles for tablets and smaller devices */
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* Styles for tablets only */
+}
+
+@media (min-width: 1025px) {
+    /* Styles for desktops only */
+}
     </style>
 </head>
-<body>
-    <h1>UMéRA AI</h1>
-    <div id="chatbox">
-        <p class="botText"><span>Hi there!</span></p>
-    </div>
-    <div id="userInput">
-        <input id="textInput" type="text" name="userMessage" placeholder="Type your message..." />
-        <input id="buttonInput" type="submit" value="Send" />
-    </div>
 
+<body>
+    <div id="main">
+        <!-- <section id="sidebar">
+            <nav id="nav">
+                <ul>
+                    <li class="nav-items"><i class="fa-solid fa-bars"></i></li>
+                    <li class="nav-items"><i class="fa-solid fa-magnifying-glass"></i></li>
+                </ul>
+            </nav>
+            <div>
+                <div id="avatar">
+                    <h1>U</h1>
+                </div>
+                <p>Umera AI</p>
+            </div>
+        </section> -->
+        <section id="dashboard">
+            <h1>Hi, I'm UMéRA AI 😊</h1>
+            <div id="promptContainer">
+                <div id="chatbox">
+                    <p class="removeBotText"><span></span></p>
+                </div>
+            </div>
+            <div class="inputContainer">
+                <div id="userInput">
+                    <input id="textInput" type="text" name="userMessage" placeholder="Chat with UMéRA AI..." />
+                    <!-- <input id="buttonInput" type="submit" value="Send" /> -->
+                    <i class="fa-regular fa-paper-plane"></i>
+                </div>
+            </div>
+        </section>
+    </div>
     <script>
         function typeBotResponse(text, container) {
-            let index = 0;
-            function type() {
-                if (index < text.length) {
-                    if (text.substr(index, 4) === "<br>") {
-                        container.innerHTML += "<br>";
-                        index += 4;
-                    } else {
-                        container.innerHTML += text.charAt(index);
-                        index++;
-                    }
-                    setTimeout(type, 30); // Typing speed
-                }
+    let index = 0;
+    function type() {
+        if (index < text.length) {
+            if (text.substr(index, 4) === "<br>") {
+                container.innerHTML += "<br>";
+                index += 4;
+            } else {
+                container.innerHTML += text.charAt(index);
+                index++;
             }
-            type();
+            setTimeout(type, 30); // Typing speed
         }
+    }
+    type();
+}
 
-        function getUserResponse() {
-            var userText = $('#textInput').val();
-            if (!userText.trim()) return; // Prevent empty input
+function getUserResponse() {
+    var userText = $('#textInput').val();
+    if (!userText.trim()) return; // Prevent empty input
 
-            var userHTML = `<p class='userText'><span>${userText}</span></p>`;
-            $('#textInput').val("");
-            $('#chatbox').append(userHTML);
+    var userHTML = `<p class='userText'><span>${userText}</span></p>`;
+    $('#textInput').val("");
+    $('#chatbox').append(userHTML);
 
-            document.getElementById("userInput").scrollIntoView({ block: 'start', behavior: 'smooth' });
+    document.getElementById("userInput").scrollIntoView({ block: 'start', behavior: 'smooth' });
 
-            // Show typing indicator
-            var botHTML = "<p class='botText'><span class='typingIndicator'>...</span></p>";
-            $('#chatbox').append(botHTML);
+    // Show typing indicator
+    var botHTML = "<p class='botText'><span class='typingIndicator'>...</span></p>";
+    $('#chatbox').append(botHTML);
 
-            // Get bot response
-            $.get("/get", { userMessage: userText }).done(function (data) {
-                var botTextContainer = document.querySelector(".typingIndicator");
-                botTextContainer.classList.remove('typingIndicator');
-                botTextContainer.innerHTML = ""; // Clear typing indicator
-                typeBotResponse(data, botTextContainer); // Display bot response with typing effect
-            });
-        }
+    // Get bot response
+    $.get("/get", { userMessage: userText }).done(function (data) {
+        var botTextContainer = document.querySelector(".typingIndicator");
+        botTextContainer.classList.remove('typingIndicator');
+        botTextContainer.innerHTML = ""; // Clear typing indicator
+        typeBotResponse(data, botTextContainer); // Display bot response with typing effect
+    });
+}
 
-        // Handle Enter keypress and button click
-        $("#textInput").keypress(function (e) {
-            if (e.which == 13) {
-                getUserResponse();
-            }
-        });
+// Handle Enter keypress and button click
+$("#textInput").keypress(function (e) {
+    if (e.which == 13) {
+        getUserResponse();
+    }
+});
 
-        $('#buttonInput').click(function () {
-            getUserResponse();
-        });
+$('.fa-paper-plane').click(function () {
+    $(this).addClass("botTex")
+    getUserResponse();
+});
     </script>
-</body>
+</body>    
 </html>
+
